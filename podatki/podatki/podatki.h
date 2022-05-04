@@ -1,22 +1,22 @@
 #pragma once
-enum WALUTA {
-	PLN = 100,
-	EUR = 470,
-	USD = 450,
-};
+#include <vector>
+#include <iostream>
 
 class Urzad {};
 
 class Kwota {
 private:
 	double wartosc;
-	WALUTA waluta;
+	std::string waluta;
+	double kurs;
 public:
-	Kwota(const double& war = 0, const WALUTA& wal = PLN) : wartosc(war), waluta(wal) {};
-	double get() const noexcept {
-		return wartosc * waluta / 100;
-	}
+	Kwota(const double& war = 0, const std::string& wal = "PLN", const double& ks = 1 ) : wartosc(war), waluta(wal), kurs(ks) {};
+	double podaj() const noexcept;
+	friend std::ostream& operator<<(std::ostream&, const Kwota&);
 };
+
+std::ostream& operator<<(std::ostream&, const Kwota&);
+
 
 class Faktura {
 private:
@@ -25,19 +25,12 @@ private:
 	int osoba;
 	Kwota kwota;
 public:
-	Faktura(const int& os, const Kwota& kw) : osoba(os), kwota(kw) {
-		ID = liczbaID;
-		liczbaID++;
-	};
-	double get() const noexcept {
-		return kwota.get();
-	}
-	int getID() const noexcept {
-		return ID;
-	}
+	Faktura(const int&, const Kwota&);
+	double podajKwote() const noexcept;
+	int podajID() const noexcept;
+	void pokaz() const noexcept;
+	void edytuj() noexcept;
 };
-
-int Faktura::liczbaID = 1;
 
 class Osoba {};
 
