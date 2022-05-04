@@ -42,4 +42,38 @@ class Dzialalnosc {};
 
 class Podatek {};
 
-class Kontener {};
+template<typename T>
+class Kontener {
+private:
+	std::vector<T> wektor = {};
+public:
+	Kontener() = default;
+	void dodaj(const T& cos) noexcept {
+		wektor.push_back(cos);
+	}
+	void edytuj(const int& id) noexcept {
+		for (auto cos = wektor.begin(); cos != wektor.end(); cos++)
+			if (cos->podajID() == id) {
+				cos->edytuj();
+				break;
+			}
+	}
+	void usun(const int& id) noexcept {
+		for (auto cos = wektor.begin(); cos != wektor.end(); cos++)
+			if (cos->podajID() == id) {
+				wektor.erase(cos);
+				break;
+			}
+	}
+	void pokaz(const int& id) const noexcept {
+		for (auto cos = wektor.begin(); cos != wektor.end(); cos++)
+			if (cos->podajID() == id) {
+				cos->pokaz();
+				break;
+			}
+	}
+	void pokaz() const noexcept {
+		for (auto cos = wektor.begin(); cos != wektor.end(); cos++)
+			cos->pokaz();
+	}
+};
