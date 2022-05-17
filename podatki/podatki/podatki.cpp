@@ -84,6 +84,10 @@ int Dzialalnosc::podajID() const noexcept
 {
 	return ID;
 }
+int Osoba::podajID() const noexcept
+{
+	return ID;
+}
 
 void Dzialalnosc::pokaz(std::ostream& output)
 {
@@ -99,6 +103,38 @@ void Dzialalnosc::edytuj(std::istream& input, std::ostream& output)
 int Dzialalnosc::liczbaID = 1;
 
 int Podatek::liczbaID = 1;
+
+void Podatek::edytujNazwe(std::istream& input, std::ostream& output)
+{
+	output << "Podaj nazwe: ";
+	input >> nazwa;
+}
+
+void Podatek::edytujProcent(std::istream& input, std::ostream& output)
+{
+	output << "Podaj procent (format: [To co napisano]%): ";
+	input >> procent;
+	procent = procent / 100;
+}
+
+void Podatek::edytujKwotaMin(std::istream& input, std::ostream& output)
+{
+	output << "Podaj kwote minimalna: ";
+	input >> kwota_min;
+}
+
+void Podatek::edytujKwotaMax(std::istream& input, std::ostream& output)
+{
+	output << "Podaj kwote maksymalna: ";
+	input >> kwota_max;
+}
+
+void Podatek::edytujRodzajDzialalnosci(std::istream& input, std::ostream& output)
+{
+	output << "Wybierz rodzaj dzialalnosci.";
+	//output wektora dzialalnosci
+	input >> rodzaj_dzialalnosci;
+}
 
 void Podatek::pokaz(std::ostream& output)
 {
@@ -153,7 +189,6 @@ void Podatek::edytuj(std::istream& input, std::ostream& output)
 	output << "2. Wartosc" << std::endl;
 	output << "3. Kwote minimalna" << std::endl;
 	output << "4. Kwote maksymalna" << std::endl;
-	output << "5. Rodzaj dzialalnosci" << std::endl;
 	int wybor;
 	input >> wybor;
 	switch (wybor)
@@ -172,38 +207,144 @@ void Podatek::edytuj(std::istream& input, std::ostream& output)
 		break;
 	case 5:
 		edytujRodzajDzialalnosci(input, output);
+	}
+}
+
+std::string Osoba::podajAdres() const noexcept
+{
+	return adres;
+}
+
+void Osoba::edytujAdres(std::istream& input)
+{
+	input >> adres;
+}
+
+void Osoba::edytujRodzajDzialalnosci(std::istream& input)
+{
+	input >> rodzaj_dzialalnosci;
+}
+
+std::string OsobaFizyczna::podajImie() const noexcept
+{
+	return imie;
+}
+
+std::string OsobaFizyczna::podajNazwisko() const noexcept
+{
+	return nazwisko;
+}
+
+std::string OsobaFizyczna::podajPesel() const noexcept
+{
+	return pesel;
+}
+
+void OsobaFizyczna::pokaz(std::ostream& output)
+{
+	output << "Imie i nazwisko : " << imie << " " << nazwisko << std::endl
+		<< "PESEL: " << pesel << std::endl
+		<< "Adres: " << adres << std::endl
+	<< "Rodzaj dzialalnosci: " << rodzaj_dzialalnosci << std::endl;
+}
+
+void OsobaFizyczna::edytujImie(std::istream& input)
+{
+	input >> imie;
+}
+
+void OsobaFizyczna::edytujNazwisko(std::istream& input)
+{
+	input >> nazwisko;
+}
+
+void OsobaFizyczna::edytujPesel(std::istream& input)
+{
+	input >> pesel;
+}
+
+void OsobaFizyczna::edytuj(std::istream& input, std::ostream& output)
+{
+	output << "Wybierz co chcesz edytowac : " << std::endl;
+	output << "1. Imie" << std::endl;
+	output << "2. Nazwisko" << std::endl;
+	output << "3. Pesel" << std::endl;
+	output << "4. Adres" << std::endl;
+	output << "5. Rodzaj dzialalnosci" << std::endl;
+	int wybor;
+	input >> wybor;
+	switch (wybor)
+	{
+	case 1:
+	edytujImie(input);
+		break;
+	case 2:
+		edytujNazwisko(input);
+		break;
+	case 3:
+		edytujPesel(input);
+		break;
+	case 4:
+		edytujAdres(input);
+		break;
+	case 5:
+		edytujRodzajDzialalnosci(input);
+		break;
+	}
+
+}
+
+std::string OsobaPrawna::podajNazwe() const noexcept
+{
+	return nazwa;
+}
+
+std::string OsobaPrawna::podajNIP() const noexcept
+{
+	return NIP;
+}
+
+void OsobaPrawna::pokaz(std::ostream& output)
+{
+		output << "Nazwa: " << nazwa << std::endl
+			<< "NIP: " << NIP << std::endl
+			<< "Adres: " << adres << std::endl
+		<< "Rodzaj dzialalnosci: " << rodzaj_dzialalnosci << std::endl;
+}
+
+void OsobaPrawna::edytuj(std::istream& input, std::ostream& output)
+{
+	output << "Wybierz co chcesz edytowac : " << std::endl;
+	output << "1. Nazwe" << std::endl;
+	output << "2. NIP" << std::endl;
+	output << "3. Adres" << std::endl;
+	output << "4. Rodzaj dzialalnosci" << std::endl;
+	int wybor;
+	input >> wybor;
+	switch (wybor)
+	{
+	case 1:
+		edytujNazwe(input);
+		break;
+	case 2:
+		edytujNIP(input);
+		break;
+	case 3:
+		edytujAdres(input);
+		break;
+	case 4:
+		edytujRodzajDzialalnosci(input);
 		break;
 	}
 }
 
-void Podatek::edytujNazwe(std::istream& input, std::ostream& output)
+
+void OsobaPrawna::edytujNazwe(std::istream& input)
 {
-	output << "Podaj nazwe: ";
 	input >> nazwa;
 }
 
-void Podatek::edytujProcent(std::istream& input, std::ostream& output)
+void OsobaPrawna::edytujNIP(std::istream& input)
 {
-	output << "Podaj procent (format: [To co napisano]%): ";
-	input >> procent;
-	procent = procent / 100;
-}
-
-void Podatek::edytujKwotaMin(std::istream& input, std::ostream& output)
-{
-	output << "Podaj kwote minimalna: ";
-	input >> kwota_min;
-}
-
-void Podatek::edytujKwotaMax(std::istream& input, std::ostream& output)
-{
-	output << "Podaj kwote maksymalna: ";
-	input >> kwota_max;
-}
-
-void Podatek::edytujRodzajDzialalnosci(std::istream& input, std::ostream& output)
-{
-	output << "Wybierz rodzaj dzialalnosci.";
-	//output wektora dzialalnosci
-	input >> rodzaj_dzialalnosci;
+	input >> NIP;
 }
