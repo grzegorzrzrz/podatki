@@ -38,9 +38,37 @@ class OsobaFizyczna : public Osoba {};
 
 class OsobaPrawna : public Osoba {};
 
-class Dzialalnosc {};
+class Dzialalnosc {
+private:
+	std::string rodzaj_dzialalnosci;
+	int ID;
+public:
+	std::string podajRodzajDzialalnosci() const noexcept;
+	int podajID() const noexcept;
+	void edytuj(std::istream& input);
+	void pokaz(std::ostream& output);
+};
 
-class Podatek {};
+class Podatek {
+private:
+	std::string nazwa;
+	int ID;
+	int rodzaj_dzialalnosci;
+	double procent;
+	double kwota_min, kwota_max; // zamiast typ double to Kwota?
+public:
+	std::string podajNazwe() const noexcept;
+	double podajProcent() const noexcept;
+	double podajKwotaMin() const noexcept;
+	double podajKwotaMax() const noexcept;
+	void edytuj(std::istream& input, std::ostream& output);
+	void edytujNazwe(std::istream& input);
+	void edytujProcent(std::istream& input);
+	void edytujKwotaMin(std::istream& input);
+	void edytujKwotaMax(std::istream& input);
+	void edytujRodzajDzialalnosci(std::istream& input);
+	void pokaz(std::ostream& output);
+};
 
 template<typename T>
 class Kontener {
