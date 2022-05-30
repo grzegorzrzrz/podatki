@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <iostream>
+#include <limits>
 
 class Urzad {};
 
@@ -40,17 +41,22 @@ class OsobaPrawna : public Osoba {};
 
 class Dzialalnosc {
 private:
+	static int liczbaID;
 	std::string rodzaj_dzialalnosci;
 	int ID;
 public:
+	Dzialalnosc(std::string nazwa);
+	Dzialalnosc(std::istream& input, std::ostream& output);
 	std::string podajRodzajDzialalnosci() const noexcept;
 	int podajID() const noexcept;
-	void edytuj(std::istream& input);
+	void edytuj(std::istream& input, std::ostream& output);
 	void pokaz(std::ostream& output);
 };
 
+
 class Podatek {
 private:
+	static int liczbaID;
 	std::string nazwa;
 	int ID;
 	int rodzaj_dzialalnosci;
@@ -61,13 +67,17 @@ public:
 	double podajProcent() const noexcept;
 	double podajKwotaMin() const noexcept;
 	double podajKwotaMax() const noexcept;
+	
 	void edytuj(std::istream& input, std::ostream& output);
-	void edytujNazwe(std::istream& input);
-	void edytujProcent(std::istream& input);
-	void edytujKwotaMin(std::istream& input);
-	void edytujKwotaMax(std::istream& input);
-	void edytujRodzajDzialalnosci(std::istream& input);
+	void edytujNazwe(std::istream& input, std::ostream& output);
+	void edytujProcent(std::istream& input, std::ostream& output);
+	void edytujKwotaMin(std::istream& input, std::ostream& output);
+	void edytujKwotaMax(std::istream& input, std::ostream& output);
+	void edytujRodzajDzialalnosci(std::istream& input, std::ostream& output);
 	void pokaz(std::ostream& output);
+	Podatek(std::istream& input, std::ostream& output);
+	Podatek(std::string, double, double, double, int);
+	//Kwota policz(Kwota& kwota);
 };
 
 template<typename T>
