@@ -30,24 +30,23 @@ public:
 	Faktura(const int&, const Kwota&);
 	double podajKwote() const noexcept;
 	int podajID() const noexcept;
-	void pokaz() const noexcept;
-	void edytuj() noexcept;
+	void pokaz(std::ostream& output) const noexcept;
+	void edytuj(std::istream& input, std::ostream& output) noexcept;
 };
 
 class Osoba {
 protected:
+	static int liczbaID;
 	int ID;
 	int rodzaj_dzialalnosci;
 	std::string adres;
 public:
 	int podajID() const noexcept;
 	std::string podajAdres() const noexcept;
-	void edytujAdres(std::istream& input);
-	void edytujRodzajDzialalnosci(std::istream& input);
-	virtual void pokaz()=0;
-	virtual void edytuj()=0;
-
-
+	void edytujAdres(std::istream& input, std::ostream& output);
+	void edytujRodzajDzialalnosci(std::istream& input, std::ostream& output);
+	virtual void pokaz(std::ostream& output)=0;
+	virtual void edytuj(std::istream& input, std::ostream& output)=0;
 };
 
 class OsobaFizyczna : public Osoba {
@@ -61,10 +60,10 @@ public:
 	std::string podajPesel() const noexcept;
 	void pokaz(std::ostream& output);
 	void edytuj(std::istream& input, std::ostream& output);
-	void edytujImie(std::istream& input);
-	void edytujNazwisko(std::istream& input);
-	void edytujPesel(std::istream& input);
-
+	void edytujImie(std::istream& input, std::ostream& output);
+	void edytujNazwisko(std::istream& input, std::ostream& output);
+	void edytujPesel(std::istream& input, std::ostream& output);
+	OsobaFizyczna(std::istream& input, std::ostream& output);
 };
 
 class OsobaPrawna : public Osoba {
@@ -76,8 +75,9 @@ public:
 	std::string podajNIP() const noexcept;
 	void pokaz(std::ostream& output);
 	void edytuj(std::istream& input, std::ostream& output);
-	void edytujNazwe(std::istream& input);
-	void edytujNIP(std::istream& input);
+	void edytujNazwe(std::istream& input, std::ostream& output);
+	void edytujNIP(std::istream& input, std::ostream& output);
+	OsobaPrawna(std::istream& input, std::ostream& output);
 };
 
 class Dzialalnosc {
@@ -130,10 +130,10 @@ public:
 	void dodaj(const T& cos) noexcept {
 		wektor.push_back(cos);
 	}
-	void edytuj(const int& id) noexcept {
+	void edytuj(const int& id, std::istream& input, std::ostream& output) noexcept {
 		for (auto cos = wektor.begin(); cos != wektor.end(); cos++)
 			if (cos->podajID() == id) {
-				cos->edytuj();
+				cos->edytuj(input, output);
 				break;
 			}
 	}
@@ -144,15 +144,15 @@ public:
 				break;
 			}
 	}
-	void pokaz(const int& id) const noexcept {
+	void pokaz(const int& id, std::ostream& output) const noexcept {
 		for (auto cos = wektor.begin(); cos != wektor.end(); cos++)
 			if (cos->podajID() == id) {
-				cos->pokaz();
+				cos->pokaz(output);
 				break;
 			}
 	}
-	void pokaz() const noexcept {
+	void pokaz(std::ostream& output) const noexcept {
 		for (auto cos = wektor.begin(); cos != wektor.end(); cos++)
-			cos->pokaz();
+			cos->pokaz(output);
 	}
 };

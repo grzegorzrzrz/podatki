@@ -24,43 +24,55 @@ int Faktura::podajID() const noexcept {
 	return ID;
 }
 
-void Faktura::pokaz() const noexcept {
-	std::cout << "Faktura nr " << ID << std::endl;
-	std::cout << "Osoba ID " << osoba << std::endl;
-	std::cout << "Kwota " << kwota << std::endl;
+void Faktura::pokaz(std::ostream& output) const noexcept {
+	output << "Faktura nr " << ID << std::endl;
+	output << "Osoba ID " << osoba << std::endl;
+	output << "Kwota " << kwota << std::endl;
 }
 
-void Faktura::edytuj() noexcept {
-	std::cout << "Wybierz co chcesz edytowac : " << std::endl;
-	std::cout << "1. ID osoby" << std::endl;
-	std::cout << "2. Kwote" << std::endl;
+void Faktura::edytuj(std::istream& input, std::ostream& output) noexcept {
+	output << "Wybierz co chcesz edytowac : " << std::endl;
+	output << "1. ID osoby" << std::endl;
+	output << "2. Kwote" << std::endl;
 	int wybor;
-	std::cin >> wybor;
+	input >> wybor;
 	switch (wybor) {
 	case 1:
 		int nowaOsoba;
-		std::cout << "Podaj nowy numer ID osoby :" << std::endl;
-		std::cin >> nowaOsoba;
+		output << "Podaj nowy numer ID osoby :" << std::endl;
+		input >> nowaOsoba;
 		osoba = nowaOsoba;
-		this->pokaz();
+		this->pokaz(output);
 		break;
 	case 2:
 		double wartosc, kurs;
 		std::string waluta;
-		std::cout << "Podaj nowa kwote" << std::endl;
-		std::cout << "Wartosc" << std::endl;
-		std::cin >> wartosc;
-		std::cout << "Waluta" << std::endl;
-		std::cin >> waluta;
-		std::cout << "Kurs" << std::endl;
-		std::cin >> kurs;
+		output << "Podaj nowa kwote" << std::endl;
+		output << "Wartosc" << std::endl;
+		input >> wartosc;
+		output << "Waluta" << std::endl;
+		input >> waluta;
+		output << "Kurs" << std::endl;
+		input >> kurs;
 		kwota = *new Kwota(wartosc, waluta, kurs);
-		this->pokaz();
+		this->pokaz(output);
 		break;
 	}
 }
 
 int Faktura::liczbaID = 1;
+int Osoba::liczbaID = 1;
+
+OsobaFizyczna::OsobaFizyczna(std::istream& input, std::ostream& output)
+{
+	ID = liczbaID;
+	liczbaID++;
+	edytujImie(input, output);
+	edytujNazwisko(input, output);
+	edytujPesel(input, output);
+	edytujAdres(input, output);
+	edytujRodzajDzialalnosci(input, output);
+}
 
 Dzialalnosc::Dzialalnosc(std::string nazwa) : rodzaj_dzialalnosci(nazwa)
 {
@@ -215,13 +227,16 @@ std::string Osoba::podajAdres() const noexcept
 	return adres;
 }
 
-void Osoba::edytujAdres(std::istream& input)
+void Osoba::edytujAdres(std::istream& input, std::ostream& output)
 {
+	output << "Podaj adres: ";
 	input >> adres;
 }
 
-void Osoba::edytujRodzajDzialalnosci(std::istream& input)
+void Osoba::edytujRodzajDzialalnosci(std::istream& input, std::ostream& output)
 {
+	output << "Wybierz rodzaj dzialalnosci.";
+		//output wektora dzialalnosci?
 	input >> rodzaj_dzialalnosci;
 }
 
@@ -248,18 +263,21 @@ void OsobaFizyczna::pokaz(std::ostream& output)
 	<< "Rodzaj dzialalnosci: " << rodzaj_dzialalnosci << std::endl;
 }
 
-void OsobaFizyczna::edytujImie(std::istream& input)
+void OsobaFizyczna::edytujImie(std::istream& input, std::ostream& output)
 {
+	output << "Podaj imie: ";
 	input >> imie;
 }
 
-void OsobaFizyczna::edytujNazwisko(std::istream& input)
+void OsobaFizyczna::edytujNazwisko(std::istream& input, std::ostream& output)
 {
+	output << "Podaj nazwisko: ";
 	input >> nazwisko;
 }
 
-void OsobaFizyczna::edytujPesel(std::istream& input)
+void OsobaFizyczna::edytujPesel(std::istream& input, std::ostream& output)
 {
+	output << "Podaj pesel: ";
 	input >> pesel;
 }
 
@@ -276,22 +294,32 @@ void OsobaFizyczna::edytuj(std::istream& input, std::ostream& output)
 	switch (wybor)
 	{
 	case 1:
-	edytujImie(input);
+		edytujImie(input, output);
 		break;
 	case 2:
-		edytujNazwisko(input);
+		edytujNazwisko(input, output);
 		break;
 	case 3:
-		edytujPesel(input);
+		edytujPesel(input, output);
 		break;
 	case 4:
-		edytujAdres(input);
+		edytujAdres(input, output);
 		break;
 	case 5:
-		edytujRodzajDzialalnosci(input);
+		edytujRodzajDzialalnosci(input, output);
 		break;
 	}
 
+}
+
+OsobaPrawna::OsobaPrawna(std::istream& input, std::ostream& output)
+{
+	ID = liczbaID;
+	liczbaID++;
+	edytujNazwe(input, output);
+	edytujNIP(input, output);
+	edytujAdres(input, output);
+	edytujRodzajDzialalnosci(input, output);
 }
 
 std::string OsobaPrawna::podajNazwe() const noexcept
@@ -324,27 +352,28 @@ void OsobaPrawna::edytuj(std::istream& input, std::ostream& output)
 	switch (wybor)
 	{
 	case 1:
-		edytujNazwe(input);
+		edytujNazwe(input, output);
 		break;
 	case 2:
-		edytujNIP(input);
+		edytujNIP(input, output);
 		break;
 	case 3:
-		edytujAdres(input);
+		edytujAdres(input, output);
 		break;
 	case 4:
-		edytujRodzajDzialalnosci(input);
+		edytujRodzajDzialalnosci(input, output);
 		break;
 	}
 }
 
-
-void OsobaPrawna::edytujNazwe(std::istream& input)
+void OsobaPrawna::edytujNazwe(std::istream& input, std::ostream& output)
 {
+	output << "Podaj nazwe osoby prawnej: ";
 	input >> nazwa;
 }
 
-void OsobaPrawna::edytujNIP(std::istream& input)
+void OsobaPrawna::edytujNIP(std::istream& input, std::ostream& output)
 {
+	output << "Podaj NIP: ";
 	input >> NIP;
 }
