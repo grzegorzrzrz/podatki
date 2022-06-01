@@ -4,6 +4,7 @@
 
 
 void Urzad::obsluz(std::istream& input, std::ostream& output) {
+	output << "     URZAD PODATKOWY     " << std::endl;
 	output << "Wybierz dzial:" << std::endl;
 	output << "1. Faktury" << std::endl;
 	output << "2. Osoby" << std::endl;
@@ -29,7 +30,7 @@ void Urzad::obsluz(std::istream& input, std::ostream& output) {
 	case 5:
 		output << "Podaj ID osoby:" << std::endl;
 		input >> wybor;
-		output << policzPodatek(wybor);
+		output << "Podatek do zaplaty: " << policzPodatek(wybor) << std::endl;
 		break;
 	}
 }
@@ -109,6 +110,7 @@ void Urzad::obsluzOsoby(std::istream& input, std::ostream& output) {
 			break;
 		}
 		}
+		break;
 	}
 	case 2:
 		output << "Podaj ID osoby:" << std::endl;
@@ -227,7 +229,7 @@ Kwota Urzad::policzPodatek(const int& id) {
 	for (auto podatek : podatki.podaj()) {
 		if (podatek.podajDzialalnosc() == osoby.podaj(id).podajDzialalnosc())
 			if (suma - podatek.podajKwotaMin() > 0)
-				doZaplaty += (suma < podatek.podajKwotaMax()) ? suma : podatek.podajKwotaMax() * podatek.podajProcent() / 100;
+				doZaplaty += (suma < podatek.podajKwotaMax() ? suma : podatek.podajKwotaMax()) * podatek.podajProcent();
 	}
 	return doZaplaty;
 }

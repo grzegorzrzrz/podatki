@@ -16,7 +16,7 @@ private:
 	Kontener<Podatek&> podatki = {};
 public:
 	Urzad() = default;
-	void obsluz(std::istream&, std::ostream&);
+	void obsluz(std::istream& = std::cin, std::ostream& = std::cout);
 	void obsluzFaktury(std::istream&, std::ostream&);
 	void obsluzOsoby(std::istream&, std::ostream&);
 	void obsluzDzialalnosci(std::istream&, std::ostream&);

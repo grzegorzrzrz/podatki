@@ -35,7 +35,7 @@ void Osoba::edytujAdres(std::istream& input, std::ostream& output)
 
 void Osoba::edytujRodzajDzialalnosci(std::istream& input, std::ostream& output)
 {
-	output << "Wybierz rodzaj dzialalnosci.";
+	output << "Wybierz rodzaj dzialalnosci:";
 	//output wektora dzialalnosci?
 	input >> rodzaj_dzialalnosci;
 }
@@ -57,7 +57,7 @@ std::string OsobaFizyczna::podajPesel() const noexcept
 
 void OsobaFizyczna::pokaz(std::ostream& output)
 {
-	output << "Imie i nazwisko : " << imie << " " << nazwisko << std::endl
+	output << "Osoba ID: " << ID << std::endl << "Imie i nazwisko : " << imie << " " << nazwisko << std::endl
 		<< "PESEL: " << pesel << std::endl
 		<< "Adres: " << adres << std::endl
 		<< "Rodzaj dzialalnosci: " << rodzaj_dzialalnosci << std::endl;
@@ -134,7 +134,7 @@ std::string OsobaPrawna::podajNIP() const noexcept
 
 void OsobaPrawna::pokaz(std::ostream& output)
 {
-	output << "Nazwa: " << nazwa << std::endl
+	output << "Osoba ID: " << ID << std::endl << "Nazwa: " << nazwa << std::endl
 		<< "NIP: " << NIP << std::endl
 		<< "Adres: " << adres << std::endl
 		<< "Rodzaj dzialalnosci: " << rodzaj_dzialalnosci << std::endl;

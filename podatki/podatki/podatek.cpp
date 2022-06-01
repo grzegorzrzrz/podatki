@@ -38,14 +38,14 @@ void Podatek::edytujKwotaMax(std::istream& input, std::ostream& output)
 
 void Podatek::edytujRodzajDzialalnosci(std::istream& input, std::ostream& output)
 {
-	output << "Wybierz rodzaj dzialalnosci.";
+	output << "Wybierz rodzaj dzialalnosci:";
 	//output wektora dzialalnosci
 	input >> rodzaj_dzialalnosci;
 }
 
 void Podatek::pokaz(std::ostream& output)
 {
-	output << "Podatek nr " << ID << std::endl << procent * 100 << "%"
+	output << "Podatek nr " << ID << std::endl << procent * 100 << "%" << std::endl
 		<< "Kwota minimalna: " << kwota_min << std::endl
 		<< "Kwota maksymalna: " << kwota_max << std::endl;
 }
