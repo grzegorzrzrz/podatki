@@ -34,6 +34,14 @@ public:
 	void edytujNazwisko(std::istream& input, std::ostream& output);
 	void edytujPesel(std::istream& input, std::ostream& output);
 	OsobaFizyczna(std::istream& input, std::ostream& output);
+	OsobaFizyczna(int rodzaj_dz, std::string adr, std::string im, std::string naz, std::string pes)
+		: imie(im), nazwisko(naz), pesel(pes)
+	{
+		rodzaj_dzialalnosci = rodzaj_dz;
+		adres = adr;
+		ID = liczbaID;
+		liczbaID++;
+	}
 };
 
 class OsobaPrawna : public Osoba {
@@ -48,4 +56,12 @@ public:
 	void edytujNazwe(std::istream& input, std::ostream& output);
 	void edytujNIP(std::istream& input, std::ostream& output);
 	OsobaPrawna(std::istream& input, std::ostream& output);
+	OsobaPrawna(int rodzaj_dz, std::string adr, std::string nz, std::string nip)
+		: nazwa(nz), NIP(nip)
+	{
+		rodzaj_dzialalnosci = rodzaj_dz;
+		adres = adr;
+		ID = liczbaID;
+		liczbaID++;
+	}
 };

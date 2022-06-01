@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "dzialalnosc.h"
-
+#include <iostream>
+#include <conio.h>
 
 Dzialalnosc::Dzialalnosc(std::string nazwa) : rodzaj_dzialalnosci(nazwa)
 {
@@ -27,13 +28,17 @@ int Dzialalnosc::podajID() const noexcept
 
 void Dzialalnosc::pokaz(std::ostream& output)
 {
+	system("CLS");
 	output << ID << ". " << rodzaj_dzialalnosci << std::endl;
+	_getch();
 }
 
 void Dzialalnosc::edytuj(std::istream& input, std::ostream& output)
 {
+	//system("CLS");
 	output << "Podaj nazwe rodzaju dzialalnosci: ";
-	input >> rodzaj_dzialalnosci;
+	input.ignore();
+	std::getline(input, rodzaj_dzialalnosci);
 }
 
 bool Dzialalnosc::operator==(const Dzialalnosc& d) const noexcept {

@@ -1,15 +1,17 @@
 #include "pch.h"
 #include "framework.h"
 #include "urzad.h"
-
-
+#include "conio.h"
 void Urzad::obsluz(std::istream& input, std::ostream& output) {
+	system("CLS");
+	output << "URZAD PODATKOWY" << std::endl;
 	output << "Wybierz dzial:" << std::endl;
 	output << "1. Faktury" << std::endl;
 	output << "2. Osoby" << std::endl;
 	output << "3. Dzialalnosci" << std::endl;
 	output << "4. Podatki" << std::endl;
 	output << "5. Policz podatek" << std::endl;
+	output << "6. Wyjscie z programu" << std::endl;
 	int wybor;
 	input >> wybor;
 	switch (wybor)
@@ -27,14 +29,21 @@ void Urzad::obsluz(std::istream& input, std::ostream& output) {
 		obsluzPodatki(input, output);
 		break;
 	case 5:
+		system("CLS");
 		output << "Podaj ID osoby:" << std::endl;
 		input >> wybor;
+		output << "Wyliczony podatek: ";
 		output << policzPodatek(wybor);
+		_getch();
+		break;
+	case 6:
+		koniecProgramu = true;
 		break;
 	}
 }
 
 void Urzad::obsluzFaktury(std::istream& input, std::ostream& output) {
+	system("CLS");
 	output << "Co chcesz zrobic?:" << std::endl;
 	output << "1. Dodaj fakture" << std::endl;
 	output << "2. Edytuj fakture" << std::endl;
@@ -43,6 +52,10 @@ void Urzad::obsluzFaktury(std::istream& input, std::ostream& output) {
 	output << "5. Pokaz wszystkie faktury" << std::endl;
 	output << "6. Wstecz" << std::endl;
 	int wybor;
+	bool koniec;
+	do
+	{
+		koniec = true;
 	input >> wybor;
 	switch (wybor)
 	{
@@ -53,16 +66,19 @@ void Urzad::obsluzFaktury(std::istream& input, std::ostream& output) {
 		break;
 	}
 	case 2:
+		system("CLS");
 		output << "Podaj ID faktury:" << std::endl;
 		input >> wybor;
 		faktury.edytuj(wybor, input, output);
 		break;
 	case 3:
+		system("CLS");
 		output << "Podaj ID faktury:" << std::endl;
 		input >> wybor;
 		faktury.usun(wybor);
 		break;
 	case 4:
+		system("CLS");
 		output << "Podaj ID faktury:" << std::endl;
 		input >> wybor;
 		faktury.pokaz(wybor, output);
@@ -71,12 +87,15 @@ void Urzad::obsluzFaktury(std::istream& input, std::ostream& output) {
 		faktury.pokaz(output);
 		break;
 	case 6:
-		obsluz(input, output);
 		break;
+	default:
+		koniec = false;
 	}
+	} while (koniec == false);
 }
 
 void Urzad::obsluzOsoby(std::istream& input, std::ostream& output) {
+	system("CLS");
 	output << "Co chcesz zrobic?:" << std::endl;
 	output << "1. Dodaj osobe" << std::endl;
 	output << "2. Edytuj osobe" << std::endl;
@@ -85,10 +104,15 @@ void Urzad::obsluzOsoby(std::istream& input, std::ostream& output) {
 	output << "5. Pokaz wszystkie osoby" << std::endl;
 	output << "6. Wstecz" << std::endl;
 	int wybor;
+	bool koniec;
+	do
+	{
+		koniec = true;
 	input >> wybor;
 	switch (wybor)
 	{
 	case 1: {
+		system("CLS");
 		output << "Wybierz rodzaj osoby:" << std::endl;
 		output << "1. Osoba fizyczna" << std::endl;
 		output << "2. Osoba prawna" << std::endl;
@@ -111,16 +135,19 @@ void Urzad::obsluzOsoby(std::istream& input, std::ostream& output) {
 		}
 	}
 	case 2:
+		system("CLS");
 		output << "Podaj ID osoby:" << std::endl;
 		input >> wybor;
 		osoby.edytuj(wybor, input, output);
 		break;
 	case 3:
+		system("CLS");
 		output << "Podaj ID osoby:" << std::endl;
 		input >> wybor;
 		osoby.usun(wybor);
 		break;
 	case 4:
+		system("CLS");
 		output << "Podaj ID osoby:" << std::endl;
 		input >> wybor;
 		osoby.pokaz(wybor, output);
@@ -129,12 +156,14 @@ void Urzad::obsluzOsoby(std::istream& input, std::ostream& output) {
 		osoby.pokaz(output);
 		break;
 	case 6:
-		obsluz(input, output);
+		koniec=true;
 		break;
 	}
+	} while (koniec == false);
 }
 
 void Urzad::obsluzDzialalnosci(std::istream& input, std::ostream& output) {
+	system("CLS");
 	output << "Co chcesz zrobic?:" << std::endl;
 	output << "1. Dodaj dzialalnosc" << std::endl;
 	output << "2. Edytuj dzialalnosc" << std::endl;
@@ -143,7 +172,12 @@ void Urzad::obsluzDzialalnosci(std::istream& input, std::ostream& output) {
 	output << "5. Pokaz wszystkie dzialalnosci" << std::endl;
 	output << "6. Wstecz" << std::endl;
 	int wybor;
+	bool koniec;
+	do
+	{
+		koniec = true;
 	input >> wybor;
+	system("CLS");
 	switch (wybor)
 	{
 	case 1: {
@@ -171,12 +205,14 @@ void Urzad::obsluzDzialalnosci(std::istream& input, std::ostream& output) {
 		dzialalnosci.pokaz(output);
 		break;
 	case 6:
-		obsluz(input, output);
+		koniec == true;
 		break;
 	}
+	} while (koniec == false);
 }
 
 void Urzad::obsluzPodatki(std::istream& input, std::ostream& output) {
+	system("CLS");
 	output << "Co chcesz zrobic?:" << std::endl;
 	output << "1. Dodaj podatek" << std::endl;
 	output << "2. Edytuj podatek" << std::endl;
@@ -185,7 +221,12 @@ void Urzad::obsluzPodatki(std::istream& input, std::ostream& output) {
 	output << "5. Pokaz wszystkie podatki" << std::endl;
 	output << "6. Wstecz" << std::endl;
 	int wybor;
+	bool koniec;
+	do
+	{
+		koniec = true;
 	input >> wybor;
+	system("CLS");
 	switch (wybor)
 	{
 	case 1: {
@@ -213,9 +254,10 @@ void Urzad::obsluzPodatki(std::istream& input, std::ostream& output) {
 		podatki.pokaz(output);
 		break;
 	case 6:
-		obsluz(input, output);
+		koniec == true;
 		break;
 	}
+	} while (koniec == false);
 }
 
 Kwota Urzad::policzPodatek(const int& id) {
@@ -227,7 +269,27 @@ Kwota Urzad::policzPodatek(const int& id) {
 	for (auto podatek : podatki.podaj()) {
 		if (podatek.podajDzialalnosc() == osoby.podaj(id).podajDzialalnosc())
 			if (suma - podatek.podajKwotaMin() > 0)
-				doZaplaty += (suma < podatek.podajKwotaMax()) ? suma : podatek.podajKwotaMax() * podatek.podajProcent() / 100;
+				doZaplaty += (suma < podatek.podajKwotaMax()) ? suma : podatek.podajKwotaMax() * podatek.podajProcent();
 	}
 	return doZaplaty;
+}
+
+void Urzad::dodajPrzykladoweDane()
+{
+	dzialalnosci.dodaj(*new Dzialalnosc("Indywidualna dzialalnosc gospodarcza"));
+	dzialalnosci.dodaj(*new Dzialalnosc("Spolka cywilna"));
+
+	osoby.dodaj(*new OsobaFizyczna(1,"ul. Lwowska 142, 42-400, Zawiercie","Jan","Kowalski","89030576819"));
+	osoby.dodaj(*new OsobaPrawna(2, "ul. Mikolajska 59, 31-027, Krakow","Grunt spolka cywilna","8383403794"));
+
+	podatki.dodaj(*new Podatek("Podatek dla spolek cywilnych",19, 2));
+	podatki.dodaj(*new Podatek("Podatek dla indywidualnych dzialalnosci gospodarczych", 17,1,0,10000));
+	podatki.dodaj(*new Podatek("Podatek dla indywidualnych dzialalnosci gospodarczych", 21, 1, 10000));
+	
+	Kwota a(9990);
+	Kwota b(10001231);
+	Kwota c(1000000);
+	faktury.dodaj(*new Faktura(1,a));
+	faktury.dodaj(*new Faktura(2,b));
+	faktury.dodaj(*new Faktura(2,c));
 }

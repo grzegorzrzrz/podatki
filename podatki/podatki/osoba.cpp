@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "osoba.h"
-
+#include <conio.h>
 OsobaFizyczna::OsobaFizyczna(std::istream& input, std::ostream& output)
 {
 	ID = liczbaID;
@@ -29,14 +29,16 @@ std::string Osoba::podajAdres() const noexcept
 
 void Osoba::edytujAdres(std::istream& input, std::ostream& output)
 {
+	system("CLS");
 	output << "Podaj adres: ";
-	input >> adres;
+	input.ignore();
+	std::getline(input, adres);
 }
 
 void Osoba::edytujRodzajDzialalnosci(std::istream& input, std::ostream& output)
 {
+	system("CLS");
 	output << "Wybierz rodzaj dzialalnosci.";
-	//output wektora dzialalnosci?
 	input >> rodzaj_dzialalnosci;
 }
 
@@ -57,32 +59,38 @@ std::string OsobaFizyczna::podajPesel() const noexcept
 
 void OsobaFizyczna::pokaz(std::ostream& output)
 {
+	system("CLS");
 	output << "Imie i nazwisko : " << imie << " " << nazwisko << std::endl
 		<< "PESEL: " << pesel << std::endl
 		<< "Adres: " << adres << std::endl
 		<< "Rodzaj dzialalnosci: " << rodzaj_dzialalnosci << std::endl;
+	_getch();
 }
 
 void OsobaFizyczna::edytujImie(std::istream& input, std::ostream& output)
 {
+	system("CLS");
 	output << "Podaj imie: ";
 	input >> imie;
 }
 
 void OsobaFizyczna::edytujNazwisko(std::istream& input, std::ostream& output)
 {
+	system("CLS");
 	output << "Podaj nazwisko: ";
 	input >> nazwisko;
 }
 
 void OsobaFizyczna::edytujPesel(std::istream& input, std::ostream& output)
 {
+	system("CLS");
 	output << "Podaj pesel: ";
 	input >> pesel;
 }
 
 void OsobaFizyczna::edytuj(std::istream& input, std::ostream& output)
 {
+	system("CLS");
 	output << "Wybierz co chcesz edytowac : " << std::endl;
 	output << "1. Imie" << std::endl;
 	output << "2. Nazwisko" << std::endl;
@@ -134,15 +142,18 @@ std::string OsobaPrawna::podajNIP() const noexcept
 
 void OsobaPrawna::pokaz(std::ostream& output)
 {
+	system("CLS");
 	output << "Nazwa: " << nazwa << std::endl
 		<< "NIP: " << NIP << std::endl
 		<< "Adres: " << adres << std::endl
 		<< "Rodzaj dzialalnosci: " << rodzaj_dzialalnosci << std::endl;
+	_getch();
 }
 
 void OsobaPrawna::edytuj(std::istream& input, std::ostream& output)
 {
-	output << "Wybierz co chcesz edytowac : " << std::endl;
+	system("CLS");
+	output << "Wybierz co chcesz edytowac: " << std::endl;
 	output << "1. Nazwe" << std::endl;
 	output << "2. NIP" << std::endl;
 	output << "3. Adres" << std::endl;
@@ -168,12 +179,15 @@ void OsobaPrawna::edytuj(std::istream& input, std::ostream& output)
 
 void OsobaPrawna::edytujNazwe(std::istream& input, std::ostream& output)
 {
+	system("CLS");
 	output << "Podaj nazwe osoby prawnej: ";
-	input >> nazwa;
+	input.ignore();
+	std::getline(input, nazwa);
 }
 
 void OsobaPrawna::edytujNIP(std::istream& input, std::ostream& output)
 {
+	system("CLS");
 	output << "Podaj NIP: ";
 	input >> NIP;
 }

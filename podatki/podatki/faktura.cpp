@@ -1,7 +1,8 @@
 #include "pch.h"
 #include "faktura.h"
-
+#include <conio.h>
 Kwota::Kwota(std::istream& input, std::ostream& output) {
+	system("CLS");
 	output << "Podaj kwote:" << std::endl;
 	input >> wartosc;
 	output << "Podaj znak waluty:" << std::endl;
@@ -47,20 +48,25 @@ int Faktura::podajOsobe() const noexcept {
 }
 
 void Faktura::pokaz(std::ostream& output) const noexcept {
+	system("CLS");
 	output << "Faktura nr " << ID << std::endl;
 	output << "Osoba ID " << osoba << std::endl;
 	output << "Kwota " << kwota << std::endl;
+	_getch();
 }
 
 void Faktura::edytuj(std::istream& input, std::ostream& output) noexcept {
+	system("CLS");
 	output << "Wybierz co chcesz edytowac : " << std::endl;
 	output << "1. ID osoby" << std::endl;
 	output << "2. Kwote" << std::endl;
 	int wybor;
 	input >> wybor;
+	system("CLS");
 	switch (wybor) {
 	case 1:
 		int nowaOsoba;
+		//output wektora osob??
 		output << "Podaj nowy numer ID osoby :" << std::endl;
 		input >> nowaOsoba;
 		osoba = nowaOsoba;

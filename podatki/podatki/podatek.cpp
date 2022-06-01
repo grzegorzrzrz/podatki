@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "podatek.h"
+#include <conio.h>
 
 int Podatek::podajID() const noexcept
 {
@@ -13,12 +14,15 @@ int Podatek::podajDzialalnosc() const noexcept
 
 void Podatek::edytujNazwe(std::istream& input, std::ostream& output)
 {
+	system("CLS");
 	output << "Podaj nazwe: ";
-	input >> nazwa;
+	input.ignore();
+	std::getline(input, nazwa);
 }
 
 void Podatek::edytujProcent(std::istream& input, std::ostream& output)
 {
+	system("CLS");
 	output << "Podaj procent (format: [To co napisano]%): ";
 	input >> procent;
 	procent = procent / 100;
@@ -26,18 +30,21 @@ void Podatek::edytujProcent(std::istream& input, std::ostream& output)
 
 void Podatek::edytujKwotaMin(std::istream& input, std::ostream& output)
 {
+	system("CLS");
 	output << "Podaj kwote minimalna: ";
 	input >> kwota_min;
 }
 
 void Podatek::edytujKwotaMax(std::istream& input, std::ostream& output)
 {
+	system("CLS");
 	output << "Podaj kwote maksymalna: ";
 	input >> kwota_max;
 }
 
 void Podatek::edytujRodzajDzialalnosci(std::istream& input, std::ostream& output)
 {
+	system("CLS");
 	output << "Wybierz rodzaj dzialalnosci.";
 	//output wektora dzialalnosci
 	input >> rodzaj_dzialalnosci;
@@ -45,9 +52,11 @@ void Podatek::edytujRodzajDzialalnosci(std::istream& input, std::ostream& output
 
 void Podatek::pokaz(std::ostream& output)
 {
+	system("CLS");
 	output << "Podatek nr " << ID << std::endl << procent * 100 << "%"
 		<< "Kwota minimalna: " << kwota_min << std::endl
 		<< "Kwota maksymalna: " << kwota_max << std::endl;
+	_getch();
 }
 
 Podatek::Podatek(std::istream& input, std::ostream& output)
@@ -59,14 +68,6 @@ Podatek::Podatek(std::istream& input, std::ostream& output)
 	edytujKwotaMin(input, output);
 	edytujKwotaMax(input, output);
 	edytujRodzajDzialalnosci(input, output);
-}
-
-Podatek::Podatek(std::string nz, double pr, double k_min = 0,
-	double k_max = std::numeric_limits<double>::max(), int rodzaj = 0)
-	: nazwa(nz), procent(pr), kwota_min(k_min), kwota_max(k_max), rodzaj_dzialalnosci(rodzaj)
-{
-	ID = liczbaID;
-	liczbaID++;
 }
 
 std::string Podatek::podajNazwe() const noexcept
@@ -91,6 +92,7 @@ double Podatek::podajKwotaMax() const noexcept
 
 void Podatek::edytuj(std::istream& input, std::ostream& output)
 {
+	system("CLS");
 	output << "Wybierz co chcesz edytowac : " << std::endl;
 	output << "1. Nazwe" << std::endl;
 	output << "2. Wartosc" << std::endl;
