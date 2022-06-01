@@ -267,9 +267,9 @@ Kwota Urzad::policzPodatek(const int& id) {
 			suma += faktura.podajKwote();
 	}
 	for (auto podatek : podatki.podaj()) {
-		if (podatek.podajDzialalnosc() == osoby.podaj(id).podajDzialalnosc())
+		if (podatek.podajDzialalnosc() == osoby.podaj(id).podajDzialalnosc() || podatek.podajDzialalnosc() == 0)
 			if (suma - podatek.podajKwotaMin() > 0)
-				doZaplaty += (suma < podatek.podajKwotaMax()) ? suma : podatek.podajKwotaMax() * podatek.podajProcent();
+				doZaplaty += (suma < podatek.podajKwotaMax() ? suma : podatek.podajKwotaMax()) * podatek.podajProcent();
 	}
 	return doZaplaty;
 }
@@ -284,8 +284,8 @@ void Urzad::dodajPrzykladoweDane()
 
 	podatki.dodaj(*new Podatek("Podatek dla spolek cywilnych",19, 2));
 	podatki.dodaj(*new Podatek("Podatek dla indywidualnych dzialalnosci gospodarczych", 17,1,0,10000));
-	podatki.dodaj(*new Podatek("Podatek dla indywidualnych dzialalnosci gospodarczych", 21, 1, 10000));
-	
+	podatki.dodaj(*new Podatek("Podatek za zarabianie za malo", 21, 1, 100, 10000));
+	podatki.dodaj(*new Podatek("Podatek dla kazdego", 5, 0));
 	Kwota a(9990);
 	Kwota b(10001231);
 	Kwota c(1000000);

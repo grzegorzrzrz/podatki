@@ -25,7 +25,7 @@ void Podatek::edytujProcent(std::istream& input, std::ostream& output)
 	system("CLS");
 	output << "Podaj procent (format: [To co napisano]%): ";
 	input >> procent;
-	procent = procent / 100;
+	procent /= 100;
 }
 
 void Podatek::edytujKwotaMin(std::istream& input, std::ostream& output)

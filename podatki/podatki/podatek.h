@@ -32,6 +32,7 @@ public:
 	{
 		ID = liczbaID;
 		liczbaID++;
+		procent /= 100;
 	}
 	bool operator==(const Podatek& p) const noexcept;
 };
