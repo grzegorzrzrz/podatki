@@ -21,15 +21,45 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="podatki.h">
+    <ClInclude Include="urzad.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lista.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="faktura.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="osoba.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dzialalnosc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="podatek.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="kontener.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="podatki.cpp">
+    <ClCompile Include="urzad.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="podatek.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dzialalnosc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="osoba.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="faktura.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
