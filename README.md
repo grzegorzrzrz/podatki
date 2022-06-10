@@ -5,25 +5,25 @@ Tematem projektu było stworzenie systemu dla urzędu skarbowego do rozliczania 
 ## Struktura
 ![schemat](schemat.png)
 
- - Klasa Urząd
+ - Klasa Urząd  
  Główna klasa, posiadająca kolekcje faktur, podatków, osób i działalności. Obsługuje wybór operacji
  
- - Klasa Faktura
+ - Klasa Faktura  
  Klasa reprezentująca fakturę przypisaną do konkretnej osoby, zawierająca kwotę. 
  
- - Klasa Kwota
+ - Klasa Kwota  
  Reprezentacja kwoty z wartością, walutą i kursie na "PLN"
  
- - Klasa Podatek
+ - Klasa Podatek  
 Klasa reprezentująca podatek, przypisany do pewnego rodzaju działalności, z ustaloną kwotą maksymalną i minimalną.
  
- - Klasa Osoba
+ - Klasa Osoba  
  Klasa bazowa klas OsobaFizyczna i OsobaPrawna, reprezentująca podatnika i zawierająca o nim informacje.
  
- - Klasa Działalność
+ - Klasa Działalność  
  Klasa reprezentująca rodzaj działalności.
  
- - Klasa Kontener
+ - Klasa Kontener  
  Kontener posiadający metody dodania, usunięcia, pokazania i edytowania elementu.
  
 
